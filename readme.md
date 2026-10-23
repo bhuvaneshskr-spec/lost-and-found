@@ -50,6 +50,8 @@ py -m http.server 8080
 ## ✨ Features & Requirements Breakdown
 
 ### 🎯 Base Requirements
+- [x] **Student Verification Entry Page (`index.html`)**: Clean, interactive gateway page requesting Student Name and VIT Registration Number, complete with live dynamic virtual VIT ID card preview, school department detection (SCOPE, SITE, SMEC, SELECT, SENSE, etc.), fast demo test profiles, and automatic redirection to the Home Page.
+- [x] **Campus Home Page (`home.html`)**: Rich campus lost & found dashboard personalized with the logged-in student's identity badge, hero welcome banner, and auto-populated reporting contact details.
 - [x] **Item Cards**: Rich cards with high-res photo, item title, status badge (`Lost`, `Found`, `Claimed`), category icon, campus building location, relative timestamp, and interactive actions.
 - [x] **Search & Multi-Filter**: 
   - Real-time search across item titles, descriptions, locations, and tags.
@@ -57,8 +59,7 @@ py -m http.server 8080
   - Filter by category (`Electronics`, `VIT ID & Cards`, `Hostel Keys`, `Backpacks`, `Textbooks`, `Apparel`, `Bottles`, `Other`).
   - Filter by campus location / building with categorized `<optgroup>` listings.
 - [x] **Post Item Form**: Complete modal form allowing students/staff to report lost or found items with custom locations, date-time, and verification questions.
-- [x] **Mock JSON & Local Persistence**: Pre-populated with 12 realistic VIT campus items and saved to `localStorage` (`vitfind_items_v3`) for instant persistence across page refreshes.
-- [x] **No Authentication Required**: Frictionless access for all campus students and visitors.
+- [x] **Mock JSON & Local Persistence**: Pre-populated with 12 realistic VIT campus items and saved to `localStorage` (`vitfind_items_v5`) for instant persistence across page refreshes.
 
 ### 🌟 Brownie Points Achieved
 - [x] **Debounced Search**: 300ms debounce buffer with loading spinner and `/` keyboard shortcut for rapid searching without UI lag.
@@ -88,15 +89,17 @@ py -m http.server 8080
 
 ```
 c:\Users\Dell\firefox\
-├── index.html              # Semantic HTML5 structure, accessible ARIA roles, modals & meta tags
+├── index.html              # Student Verification Entry Gateway (Name & Reg No -> redirect to home.html)
+├── home.html               # Main VIT Find Campus Hub & Lost/Found Dashboard
+├── login.html              # Clean redirect alias to index.html
 ├── README.md               # Documentation and architectural overview
 ├── css/
-│   └── style.css           # Design tokens, color system, glassmorphism, responsive grid & animations
+│   └── style.css           # Design tokens, color system, digital ID card, glassmorphism & responsive grid
 └── js/
     ├── mockData.js         # VIT locations (SJT, TT, MB, MGB, Hostels A-T/A-S), items, and presets
     ├── components.js       # Card templates, skeleton loader, distance engine & toast notifications
     ├── formValidator.js    # Live input validation, drag-and-drop dropzone & FileReader image preview
-    └── app.js              # Application state machine, debounced search, filtering & modal controller
+    └── app.js              # Application state machine, user session controller, search & filters
 ```
 
 ### Component Structure Detail:
