@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VIT Find • Campus Lost & Found Hub</title>
-  <meta name="description" content="VIT Find - The campus lost and found hub for VIT Vellore. Easily post, search, filter, and claim lost items across SJT, TT, MB, MGB, hostels, and libraries.">
+  <title>VIT Find • Student Verification & Sign In</title>
+  <meta name="description" content="Official Student Gateway for VIT Find - Lost & Found Hub for VIT Vellore campus. Enter your name and registration number to proceed to the home page.">
   <meta name="theme-color" content="#4f46e5">
 
   <!-- Google Fonts: Plus Jakarta Sans -->
@@ -15,19 +15,19 @@
   <!-- Master Stylesheet -->
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body class="gateway-page">
 
   <!-- Top Campus Pulse Indicator -->
-  <aside class="top-notice-bar" aria-label="Campus Network Status">
+  <aside class="top-notice-bar" aria-label="Campus Gateway Status">
     <span class="notice-pulse" aria-hidden="true"></span>
-    <span>Live VIT Vellore Lost &amp; Found Network &bull; SJT, TT, MB &amp; Hostels Connected &bull; Real-time Proximity Sorting Active</span>
+    <span>VIT Vellore Official Campus Lost &amp; Found Portal &bull; Student Identity Verification Gateway</span>
   </aside>
 
   <!-- Sticky Main Header -->
   <header class="site-header" role="banner">
     <div class="container header-inner">
       <!-- Brand Logo -->
-      <div class="brand-wrapper" id="brandHomeBtn" role="button" tabindex="0" aria-label="VIT Find Home">
+      <div class="brand-wrapper" id="brandLogoBtn" role="button" tabindex="0" aria-label="VIT Find">
         <div class="brand-logo-icon" aria-hidden="true">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="11" cy="11" r="8"></circle>
@@ -46,16 +46,12 @@
 
       <!-- Header Center / Actions -->
       <div class="header-actions">
-        <!-- Current User Campus Location Picker (for Proximity Calculation) -->
-        <div class="user-location-selector-wrap" title="Set your current location to calculate distance to lost/found items">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-            <circle cx="12" cy="10" r="3"></circle>
+        <!-- Gateway Badge -->
+        <div class="hero-pill" style="margin-bottom:0; font-size:0.75rem; padding: 0.35rem 0.8rem;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
           </svg>
-          <span style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">Your Spot:</span>
-          <select id="userLocationSelect" aria-label="Select your current campus location">
-            <!-- Dynamically populated from CAMPUS_LOCATIONS -->
-          </select>
+          <span>Campus Verification</span>
         </div>
 
         <!-- Dark / Light Theme Toggle -->
@@ -75,763 +71,589 @@
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
           </svg>
         </button>
-
-        <!-- Post Item Action Button -->
-        <button class="btn-primary" id="openPostModalBtn" aria-haspopup="dialog">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <line x1="12" y1="5" x2="12" y2="19"></line>
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-          </svg>
-          <span>Post an Item</span>
-        </button>
       </div>
     </div>
   </header>
 
-  <!-- Main Workspace -->
-  <main class="container" id="mainContent">
+  <!-- Main Content -->
+  <main class="gateway-container" id="mainContent">
 
-    <!-- Hero Section & Campus Quick Stats -->
-    <section class="hero-section" aria-labelledby="heroHeading">
-      <div class="hero-content">
-        <div class="hero-pill">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-          </svg>
-          Official Campus Community Network
+    <!-- Hero Header -->
+    <div class="gateway-hero">
+      <div class="gateway-pill">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+          <path d="M2 17l10 5 10-5"></path>
+          <path d="M2 12l10 5 10-5"></path>
+        </svg>
+        <span>Official VIT Vellore Student Gateway</span>
+      </div>
+      <h1 class="gateway-hero-title">
+        Campus Verification &amp; <span class="gradient-text">Lost &amp; Found Access</span>
+      </h1>
+      <p class="gateway-hero-desc">
+        Please identify yourself with your student name and registration number to proceed to the VIT Find Home Page. Your credentials personalize item reporting, ownership claiming, and proximity tracking.
+      </p>
+    </div>
+
+    <!-- Active Session Card (Only shown if already signed in) -->
+    <div id="welcomeBackSection" class="welcome-back-card" style="display:none; max-width: 600px; margin: 0 auto 2.5rem;">
+      <div class="wb-avatar-wrap" id="wbAvatarText">AS</div>
+      <h3 style="font-size:1.35rem; font-weight:800; margin-bottom:0.35rem;" id="wbGreeting">Welcome back, Student!</h3>
+      <p style="color:var(--text-secondary); margin-bottom:1.5rem; font-size:0.95rem;">
+        You are currently signed in as <strong id="wbNameDisplay">Aarav Sharma</strong> (<code id="wbRegDisplay" style="background:var(--primary-50); padding:2px 6px; border-radius:4px; font-weight:700;">21BCE1042</code>).
+      </p>
+      <div style="display:flex; gap:0.8rem; justify-content:center; flex-wrap:wrap;">
+        <button type="button" id="wbProceedBtn" class="btn-primary" style="padding:0.75rem 1.6rem; font-size:0.95rem;">
+          <span>Proceed to Home Page &rarr;</span>
+        </button>
+        <button type="button" id="wbSwitchBtn" class="btn-secondary" style="padding:0.75rem 1.4rem; font-size:0.95rem;">
+          <span>Switch Student / Log Out</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Gateway Two-Column Layout -->
+    <div class="gateway-grid" id="gatewayGrid">
+
+      <!-- Left Column: Registration Form Card -->
+      <section class="gateway-card" aria-labelledby="formTitle">
+        <div class="gateway-card-header">
+          <h2 class="gateway-card-title" id="formTitle">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" style="color:var(--primary-600);">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span>Student Verification</span>
+          </h2>
+          <p class="gateway-card-desc">Enter your name and VIT registration number to enter the campus hub.</p>
         </div>
-        <h1 class="hero-title" id="heroHeading">
-          Reuniting Students with their <span class="gradient-text">Lost Belongings</span>
-        </h1>
-        <p class="hero-desc">
-          Easily report lost items, browse verified found belongings across campus libraries, quads, and halls, or claim what's rightfully yours.
-        </p>
 
-        <!-- Stats Bar -->
-        <div class="stats-grid" id="statsContainer">
-          <div class="stat-card">
-            <div class="stat-icon blue" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
-                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
-              </svg>
-            </div>
-            <div>
-              <div class="stat-number" id="statTotalCount">0</div>
-              <div class="stat-label">Total Logged Items</div>
-            </div>
+        <form id="gatewayForm" novalidate>
+          <!-- Full Name Input -->
+          <div class="form-group">
+            <label class="form-label" for="userNameInput">
+              <span>Full Name <span style="color:var(--accent-rose);">*</span></span>
+              <span style="font-size:0.75rem; color:var(--text-muted); font-weight:normal;">As per VIT Student ID</span>
+            </label>
+            <input 
+              type="text" 
+              id="userNameInput" 
+              name="studentName" 
+              class="form-input" 
+              placeholder="e.g. Aarav Sharma" 
+              autocomplete="name"
+              required
+            >
+            <div class="form-error-msg" id="nameErrorMsg">Please enter your full name (minimum 2 characters).</div>
           </div>
 
-          <div class="stat-card">
-            <div class="stat-icon rose" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"></circle>
-                <line x1="12" y1="8" x2="12" y2="12"></line>
-                <line x1="12" y1="16" x2="12.01" y2="16"></line>
-              </svg>
-            </div>
-            <div>
-              <div class="stat-number" id="statLostCount">0</div>
-              <div class="stat-label">Actively Lost</div>
-            </div>
-          </div>
-
-          <div class="stat-card">
-            <div class="stat-icon emerald" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <!-- Registration Number Input -->
+          <div class="form-group">
+            <label class="form-label" for="userRegInput">
+              <span>Registration Number <span style="color:var(--accent-rose);">*</span></span>
+              <span style="font-size:0.75rem; color:var(--text-muted); font-weight:normal;">e.g. 21BCE1042</span>
+            </label>
+            <input 
+              type="text" 
+              id="userRegInput" 
+              name="regNo" 
+              class="form-input" 
+              placeholder="e.g. 21BCE1042 or 23MIS0182" 
+              autocomplete="off"
+              style="text-transform: uppercase; font-family: ui-monospace, monospace; letter-spacing: 0.5px;"
+              required
+            >
+            <!-- Dynamic School Feedback Badge -->
+            <div id="detectedSchoolBadge" class="detected-school-badge hidden">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
                 <polyline points="22 4 12 14.01 9 11.01"></polyline>
               </svg>
+              <span id="detectedSchoolText">SCOPE &bull; School of Computer Science &amp; Engineering</span>
             </div>
-            <div>
-              <div class="stat-number" id="statFoundCount">0</div>
-              <div class="stat-label">Found &amp; Waiting</div>
-            </div>
+            <div class="form-error-msg" id="regErrorMsg">Please enter a valid VIT registration number (e.g. 21BCE1042).</div>
           </div>
 
-          <div class="stat-card">
-            <div class="stat-icon purple" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+          <!-- Preferred Campus Location -->
+          <div class="form-group">
+            <label class="form-label" for="userSpotSelect">
+              <span>Your Frequent Campus Spot / Hostel Block</span>
+              <span style="font-size:0.75rem; color:var(--text-muted); font-weight:normal;">Used for proximity calculation</span>
+            </label>
+            <select id="userSpotSelect" class="form-select">
+              <optgroup label="Academic &amp; Central Blocks">
+                <option value="sjt" selected>SJT (Silver Jubilee Tower)</option>
+                <option value="tt">TT (Technology Tower)</option>
+                <option value="mb">MB (Main Building)</option>
+                <option value="mgb">MGB (Mahatma Gandhi Block)</option>
+                <option value="smv">SMV (Sir M. Visvesvaraya Block)</option>
+                <option value="gdn">GDN (G.D. Naidu Block)</option>
+                <option value="prp">PRP (Dr. P.R. Paul Raj Block)</option>
+                <option value="anna-lib">Anna Library (Central)</option>
+                <option value="kc-lawn">KC Lawn (Amphitheater)</option>
+              </optgroup>
+              <optgroup label="Food &amp; Hangouts">
+                <option value="foodys">Foodys (Central Hangout)</option>
+                <option value="sjt-foodys">SJT Foodys (Food &amp; Hangout)</option>
+                <option value="fc">FC (Food Court)</option>
+                <option value="dc">DC (Dining Commons)</option>
+                <option value="darling-cafe">Darling Cafe</option>
+                <option value="amul">Amul</option>
+                <option value="dominos">Dominos</option>
+              </optgroup>
+              <optgroup label="Men's Hostels (MH)">
+                <option value="mh-a">MH - Block A</option>
+                <option value="mh-b">MH - Block B</option>
+                <option value="mh-d">MH - Block D</option>
+                <option value="mh-g">MH - Block G</option>
+                <option value="mh-k">MH - Block K</option>
+                <option value="mh-m">MH - Block M</option>
+                <option value="mh-p">MH - Block P</option>
+                <option value="mh-q">MH - Block Q</option>
+                <option value="mh-r">MH - Block R</option>
+              </optgroup>
+              <optgroup label="Ladies' Hostels (LH)">
+                <option value="lh-a">LH - Block A</option>
+                <option value="lh-b">LH - Block B</option>
+                <option value="lh-c">LH - Block C</option>
+                <option value="lh-d">LH - Block D</option>
+                <option value="lh-e">LH - Block E</option>
+                <option value="lh-f">LH - Block F</option>
+                <option value="lh-g">LH - Block G</option>
+                <option value="lh-q">LH - Block Q</option>
+              </optgroup>
+            </select>
+          </div>
+
+          <!-- Quick Test / Demo Profiles -->
+          <div class="demo-students-box">
+            <div class="demo-students-title">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
               </svg>
+              <span>Quick Demo Test Profiles (1-Click Fill)</span>
             </div>
-            <div>
-              <div class="stat-number" id="statClaimedCount">0</div>
-              <div class="stat-label">Reunited with Owners</div>
+            <div class="demo-chips-grid">
+              <button type="button" class="demo-chip-btn" data-name="Aarav Sharma" data-reg="21BCE1042" data-spot="sjt">
+                <span>Aarav Sharma</span>
+                <span class="chip-spot">21BCE1042 • SJT</span>
+              </button>
+              <button type="button" class="demo-chip-btn" data-name="Sneha Patel" data-reg="23MIS0182" data-spot="tt">
+                <span>Sneha Patel</span>
+                <span class="chip-spot">23MIS0182 • TT</span>
+              </button>
+              <button type="button" class="demo-chip-btn" data-name="Vikram Reddy" data-reg="22BEE0341" data-spot="foodys">
+                <span>Vikram Reddy</span>
+                <span class="chip-spot">22BEE0341 • Foodys</span>
+              </button>
+              <button type="button" class="demo-chip-btn" data-name="Ananya Roy" data-reg="24BCSE105" data-spot="mh-q">
+                <span>Ananya Roy</span>
+                <span class="chip-spot">24BCSE105 • MH-Q</span>
+              </button>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- Comprehensive Search, Filter, and Sorting Hub -->
-    <section class="controls-card" aria-label="Search and Filter Controls">
-      <!-- Top Row: Debounced Search & Status Tabs -->
-      <div class="controls-row-top">
-        <!-- Debounced Search Input with keyboard shortcut and clear button -->
-        <div class="search-input-wrapper">
-          <span class="search-icon-left" aria-hidden="true">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="11" cy="11" r="8"></circle>
-              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          <!-- Submit Action Button -->
+          <button type="submit" id="submitGatewayBtn" class="btn-gateway-submit">
+            <span id="submitBtnText">Enter VIT Find Hub</span>
+            <svg id="submitBtnIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
             </svg>
+          </button>
+        </form>
+      </section>
+
+      <!-- Right Column: Live Interactive Digital VIT Student ID Card Preview -->
+      <aside class="id-card-preview-container" aria-label="Digital ID Card Preview">
+        <div class="id-card-badge-header">
+          <span>Live Digital Student ID</span>
+          <span style="display:inline-flex; align-items:center; gap:0.4rem;">
+            <span class="live-pulse-dot"></span> Real-time Sync
           </span>
+        </div>
 
-          <input 
-            type="search" 
-            id="searchInput" 
-            class="search-input" 
-            placeholder="Search items by keyword, brand, color, building (e.g. MacBook, Hydroflask, Dorm key)..." 
-            autocomplete="off"
-            aria-label="Search items"
-          >
+        <!-- The Physical-style ID Card -->
+        <div class="vit-id-card" id="vitIdCard">
+          <!-- Card Top Bar: Crest & Institution -->
+          <div class="id-card-top-bar">
+            <div class="id-inst-logo">
+              <div class="id-inst-crest">VIT</div>
+              <div class="id-inst-text">
+                <div class="id-inst-name">Vellore Institute of Technology</div>
+                <div class="id-inst-sub">Student Identity Card &bull; Vellore Campus</div>
+              </div>
+            </div>
+            <!-- Smart Chip Simulation -->
+            <div class="id-card-chip-sim" title="Campus Smart RFID Chip"></div>
+          </div>
 
-          <div class="search-indicators">
-            <span class="search-spinner" id="searchSpinner" aria-hidden="true" title="Debouncing search..."></span>
-            <button class="search-clear-btn" id="searchClearBtn" aria-label="Clear search input" title="Clear search">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
+          <!-- Card Middle: Photo + Live Typed Fields -->
+          <div class="id-card-middle">
+            <div class="id-photo-box">
+              <div class="id-photo-initials" id="cardPreviewInitials">AS</div>
+              <div class="id-photo-label">Scholar</div>
+            </div>
+
+            <div class="id-fields-group">
+              <div class="id-field-item">
+                <label>Student Name</label>
+                <div class="id-val-name" id="cardPreviewName">Aarav Sharma</div>
+              </div>
+
+              <div class="id-field-item">
+                <label>Registration Number</label>
+                <div class="id-val-reg" id="cardPreviewReg">21BCE1042</div>
+              </div>
+
+              <div class="id-field-item">
+                <label>School / Department</label>
+                <div class="id-val-school" id="cardPreviewSchool">School of Computer Science &amp; Engineering (SCOPE)</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card Bottom: Barcode & Validity -->
+          <div class="id-card-bottom">
+            <div style="display:flex; flex-direction:column; gap:2px;">
+              <div class="id-barcode-lines"></div>
+              <span style="font-family: monospace; font-size: 0.62rem; color: #94a3b8; letter-spacing: 1px;" id="cardBarcodeReg">21BCE1042</span>
+            </div>
+            <div class="id-validity-tag">
+              Status: <strong>Active Campus Scholar</strong>
+              Valid: 2026 &ndash; 2027
+            </div>
+          </div>
+        </div>
+
+        <!-- Key Campus Network Features -->
+        <div class="gateway-features-card">
+          <div class="gateway-features-title">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent-emerald);">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>What happens after you sign in?</span>
+          </div>
+
+          <div class="gateway-features-list">
+            <div class="gateway-feature-row">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
               </svg>
-            </button>
-            <kbd class="kbd-shortcut" title="Press '/' to quickly focus search">/</kbd>
+              <div>
+                <strong>Proximity Sorting:</strong> Calculate walking distance and minutes from your spot (SJT, TT, Foodys, or Hostels) to any lost item.
+              </div>
+            </div>
+
+            <div class="gateway-feature-row">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
+              <div>
+                <strong>Verified Claims:</strong> Answer security verification questions to safely claim belongings with your registered student proof.
+              </div>
+            </div>
+
+            <div class="gateway-feature-row">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+                <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                <line x1="15" y1="9" x2="15.01" y2="9"></line>
+              </svg>
+              <div>
+                <strong>🍕 Campus Treat Finder:</strong> Offer treats at Dominos, Food Court, or Darling Cafe when students reunite you with lost items.
+              </div>
+            </div>
           </div>
         </div>
+      </aside>
 
-        <!-- Status Segmented Control (All, Lost, Found, Claimed) -->
-        <div class="status-segmented-control" role="tablist" aria-label="Filter by item status">
-          <button class="segment-btn active" role="tab" aria-selected="true" data-status="all">
-            All Items <span class="segment-badge" id="tabCountAll">0</span>
-          </button>
-          <button class="segment-btn" role="tab" aria-selected="false" data-status="lost">
-            Lost <span class="segment-badge" id="tabCountLost">0</span>
-          </button>
-          <button class="segment-btn" role="tab" aria-selected="false" data-status="found">
-            Found <span class="segment-badge" id="tabCountFound">0</span>
-          </button>
-          <button class="segment-btn" role="tab" aria-selected="false" data-status="claimed">
-            Claimed <span class="segment-badge" id="tabCountClaimed">0</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- Bottom Row: Category Chips, Location Filter & Sort Options -->
-      <div class="controls-row-bottom">
-        <!-- Category Filter Chips -->
-        <div class="category-chips-scroll" id="categoryChipsWrap" role="toolbar" aria-label="Category Filters">
-          <!-- Dynamically generated category chips with active states -->
-        </div>
-
-        <!-- Dropdowns: Location & Sort -->
-        <div class="dropdown-filters-wrap">
-          <!-- Location Dropdown -->
-          <div class="select-filter-group">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-              <circle cx="12" cy="10" r="3"></circle>
-            </svg>
-            <select id="filterLocationSelect" aria-label="Filter by campus location">
-              <option value="all">All Campus Buildings</option>
-              <!-- Options populated dynamically from CAMPUS_LOCATIONS -->
-            </select>
-          </div>
-
-          <!-- Sort Dropdown (Newest, Oldest, Nearest, Most Relevant) -->
-          <div class="select-filter-group">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <line x1="4" y1="6" x2="20" y2="6"></line>
-              <line x1="4" y1="12" x2="14" y2="12"></line>
-              <line x1="4" y1="18" x2="8" y2="18"></line>
-            </svg>
-            <select id="sortBySelect" aria-label="Sort items">
-              <option value="newest">Sort: Newest First</option>
-              <option value="oldest">Sort: Oldest First</option>
-              <option value="nearest">Sort: Nearest to You 📍</option>
-              <option value="title">Sort: Alphabetical (A-Z)</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
-      <!-- Active Filter Tags (Removable badges) -->
-      <div class="active-filters-bar" id="activeFiltersBar" aria-live="polite">
-        <span style="font-weight: 600; color: var(--text-muted);">Active Filters:</span>
-        <div id="activeFilterTagsList" style="display:inline-flex; gap:0.5rem; flex-wrap:wrap;"></div>
-        <button class="btn-clear-all" id="resetAllFiltersBtn">Reset All</button>
-      </div>
-    </section>
-
-    <!-- Results Header -->
-    <div class="feed-header">
-      <div class="results-count-text" id="resultsCount">
-        Showing <span>0</span> campus items
-      </div>
     </div>
-
-    <!-- Items Grid & States -->
-    <div class="items-grid" id="itemsGrid" aria-live="polite">
-      <!-- Items or Skeleton Loader inserted dynamically by app.js -->
-    </div>
-
-    <!-- Empty State Template Container (Brownie Point) -->
-    <div class="empty-state-wrap" id="emptyState" style="display: none;">
-      <svg class="empty-illustration" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <circle cx="11" cy="11" r="8"></circle>
-        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-        <path d="M8 11h6"></path>
-      </svg>
-      <h3 class="empty-title">No Matching Campus Items Found</h3>
-      <p class="empty-desc">
-        We couldn't find any lost or found items matching your search query and filters. Try adjusting keywords, changing categories, or clearing your active filters.
-      </p>
-      <button class="btn-secondary" id="emptyStateResetBtn">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <polyline points="1 4 1 10 7 10"></polyline>
-          <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
-        </svg>
-        <span>Clear All Filters</span>
-      </button>
-    </div>
-
   </main>
-
-  <!-- =========================================================================
-       MODAL 1: Post Lost or Found Item Form (Brownie Points: Image Preview & Validation)
-       ========================================================================= -->
-  <div class="modal-backdrop" id="postModal" role="dialog" aria-modal="true" aria-labelledby="postModalTitle">
-    <div class="modal-window">
-      <!-- Modal Header -->
-      <div class="modal-header">
-        <div class="modal-title-wrap">
-          <div class="modal-title-icon" aria-hidden="true">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-            </svg>
-          </div>
-          <div>
-            <h2 class="modal-title" id="postModalTitle">Post an Item</h2>
-            <div class="modal-subtitle">Submit a lost or found report to notify the campus community</div>
-          </div>
-        </div>
-        <button class="modal-close-btn" id="closePostModalBtn" aria-label="Close dialog">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
-        </button>
-      </div>
-
-      <!-- Modal Body / Form -->
-      <form id="postItemForm" class="modal-body" novalidate>
-        <!-- Type Selection: Lost vs Found -->
-        <div class="post-type-selector">
-          <label>
-            <input type="radio" name="itemType" value="lost" class="post-type-radio" checked>
-            <div class="post-type-card">
-              <div class="post-type-icon">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <line x1="12" y1="8" x2="12" y2="12"></line>
-                  <line x1="12" y1="16" x2="12.01" y2="16"></line>
-                </svg>
-              </div>
-              <div>
-                <strong style="display:block; font-size:0.9rem;">I Lost Something</strong>
-                <span style="font-size:0.75rem; color:var(--text-muted);">Seek help finding your item</span>
-              </div>
-            </div>
-          </label>
-
-          <label>
-            <input type="radio" name="itemType" value="found" class="post-type-radio">
-            <div class="post-type-card">
-              <div class="post-type-icon">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                </svg>
-              </div>
-              <div>
-                <strong style="display:block; font-size:0.9rem;">I Found Something</strong>
-                <span style="font-size:0.75rem; color:var(--text-muted);">Help return an item to owner</span>
-              </div>
-            </div>
-          </label>
-        </div>
-
-        <!-- Item Title -->
-        <div class="form-group">
-          <label class="form-label" for="itemTitleInput">
-            <span>Item Name &amp; Model <span style="color:var(--accent-rose);">*</span></span>
-            <span class="char-counter" id="titleCharCount">0/80</span>
-          </label>
-          <input 
-            type="text" 
-            id="itemTitleInput" 
-            name="title" 
-            class="form-input" 
-            placeholder="e.g. Space Gray 14-inch MacBook Pro, Hydro Flask, Dorm keys" 
-            maxlength="80" 
-            required
-          >
-          <div class="form-error-msg" id="titleError">Please enter a descriptive item name (minimum 3 characters).</div>
-        </div>
-
-        <!-- Category & Location Row -->
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label" for="itemCategorySelect">
-              <span>Category <span style="color:var(--accent-rose);">*</span></span>
-            </label>
-            <select id="itemCategorySelect" name="category" class="form-select" required>
-              <option value="">Select Category...</option>
-              <!-- Filled via JS -->
-            </select>
-            <div class="form-error-msg" id="categoryError">Please choose an item category.</div>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" for="itemLocationSelect">
-              <span>Campus Building / Zone <span style="color:var(--accent-rose);">*</span></span>
-            </label>
-            <select id="itemLocationSelect" name="location" class="form-select" required>
-              <option value="">Select Campus Location...</option>
-              <!-- Filled via JS -->
-            </select>
-            <div class="form-error-msg" id="locationError">Please choose the campus building or zone.</div>
-          </div>
-        </div>
-
-        <!-- Specific Spot Detail & Date Row -->
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label" for="itemLocationDetailInput">
-              <span>Specific Spot / Room / Desk</span>
-            </label>
-            <input 
-              type="text" 
-              id="itemLocationDetailInput" 
-              name="locationDetail" 
-              class="form-input" 
-              placeholder="e.g. 2nd floor silent study room, desk #12"
-            >
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" for="itemDateInput">
-              <span>Date &amp; Approx. Time <span style="color:var(--accent-rose);">*</span></span>
-            </label>
-            <input 
-              type="datetime-local" 
-              id="itemDateInput" 
-              name="date" 
-              class="form-input" 
-              required
-            >
-            <div class="form-error-msg" id="dateError">Please specify the date when this occurred.</div>
-          </div>
-        </div>
-
-        <!-- Description Textarea -->
-        <div class="form-group">
-          <label class="form-label" for="itemDescriptionInput">
-            <span>Detailed Description <span style="color:var(--accent-rose);">*</span></span>
-            <span class="char-counter" id="descCharCount">0/400</span>
-          </label>
-          <textarea 
-            id="itemDescriptionInput" 
-            name="description" 
-            class="form-textarea" 
-            placeholder="Describe distinguishing marks, color, brand, stickers, scratches, case, or contents..." 
-            maxlength="400" 
-            required
-          ></textarea>
-          <div class="form-error-msg" id="descError">Please provide a description (minimum 10 characters).</div>
-        </div>
-
-        <!-- Image Upload & Live Preview (Brownie Point) -->
-        <div class="image-upload-wrapper">
-          <label class="form-label">
-            <span>Item Photograph</span>
-            <span style="font-size:0.75rem; color:var(--text-muted); font-weight:normal;">Upload or choose a quick sample</span>
-          </label>
-
-          <!-- Dropzone -->
-          <div class="image-dropzone" id="imageDropzone" role="button" tabindex="0">
-            <svg class="dropzone-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-              <circle cx="8.5" cy="8.5" r="1.5"></circle>
-              <polyline points="21 15 16 10 5 21"></polyline>
-            </svg>
-            <div class="dropzone-text-main">Click to browse or drag &amp; drop an image</div>
-            <div class="dropzone-text-sub">Supports PNG, JPG, WebP (Max 5MB)</div>
-            <input type="file" id="imageFileInput" accept="image/*" class="dropzone-file-input">
-          </div>
-
-          <!-- Preview Container with Remove Action -->
-          <div class="image-preview-container" id="imagePreviewContainer">
-            <img id="imagePreviewImg" class="preview-img" src="" alt="Item photo preview">
-            <button type="button" class="preview-remove-btn" id="removeImageBtn" title="Remove image">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
-              </svg>
-              <span>Remove Photo</span>
-            </button>
-          </div>
-
-          <!-- Quick Preset Sample Photos -->
-          <div class="preset-samples-wrap">
-            <div class="preset-title">Or click a sample campus preset photo:</div>
-            <div class="preset-buttons-row" id="presetButtonsRow">
-              <!-- Dynamically rendered sample buttons -->
-            </div>
-          </div>
-        </div>
-
-        <!-- Contact & Verification Details -->
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label" for="itemPosterName">
-              <span>Your Name / Desk <span style="color:var(--accent-rose);">*</span></span>
-            </label>
-            <input 
-              type="text" 
-              id="itemPosterName" 
-              name="finderName" 
-              class="form-input" 
-              placeholder="e.g. Jordan Smith or Library Front Desk" 
-              required
-            >
-            <div class="form-error-msg" id="posterNameError">Please enter your name or campus office.</div>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" for="itemContact">
-              <span>Campus Email or Phone <span style="color:var(--accent-rose);">*</span></span>
-            </label>
-            <input 
-              type="text" 
-              id="itemContact" 
-              name="contact" 
-              class="form-input" 
-              placeholder="e.g. jsmith@campus.edu or 555-0192" 
-              required
-            >
-            <div class="form-error-msg" id="contactError">Please enter valid contact information.</div>
-          </div>
-        </div>
-
-        <!-- Treat Option for Lost Items (Food places only) -->
-        <div class="form-group" id="treatOptionGroup">
-          <div style="background:rgba(245, 158, 11, 0.08); border:1.5px solid rgba(245, 158, 11, 0.35); border-radius:var(--radius-md); padding:1rem;">
-            <div style="display:flex; align-items:center; justify-content:space-between;">
-              <label class="form-label" style="margin-bottom:0; cursor:pointer;" for="enableTreatToggle">
-                <span style="display:flex; align-items:center; gap:0.4rem; font-weight:700; color:var(--text-main);">
-                  <span style="font-size:1.15rem;">🍕</span> Offer a Treat / Reward to Finder (Food Places Only)
-                </span>
-              </label>
-              <input type="checkbox" id="enableTreatToggle" style="width:18px; height:18px; accent-color:var(--primary-600); cursor:pointer;">
-            </div>
-            
-            <div id="treatFieldsWrap" style="display:none; margin-top:0.85rem; padding-top:0.75rem; border-top:1px dashed rgba(245, 158, 11, 0.3);">
-              <div class="form-row">
-                <div class="form-group" style="margin-bottom:0.6rem;">
-                  <label class="form-label" for="treatFoodPlaceSelect" style="font-size:0.8rem;">
-                    <span>Campus Food Spot <span style="color:var(--accent-rose);">*</span></span>
-                  </label>
-                  <select id="treatFoodPlaceSelect" class="form-select" style="font-size:0.85rem;">
-                    <!-- Dynamically populated ONLY with Food places -->
-                  </select>
-                </div>
-                <div class="form-group" style="margin-bottom:0.6rem;">
-                  <label class="form-label" for="treatAmountInput" style="font-size:0.8rem;">
-                    <span>Treat Details / Item / Amount</span>
-                  </label>
-                  <input type="text" id="treatAmountInput" class="form-input" placeholder="e.g. ₹200 treat or Pizza meal" style="font-size:0.85rem;">
-                </div>
-              </div>
-              <div class="preset-buttons-row" style="margin-top:0.25rem;">
-                <button type="button" class="preset-sample-btn treat-quick-btn" data-val="₹100 Treat">₹100 Treat</button>
-                <button type="button" class="preset-sample-btn treat-quick-btn" data-val="₹200 Treat">₹200 Treat</button>
-                <button type="button" class="preset-sample-btn treat-quick-btn" data-val="₹500 Treat">₹500 Treat</button>
-                <button type="button" class="preset-sample-btn treat-quick-btn" data-val="Pizza & Drink Treat">Pizza Treat</button>
-                <button type="button" class="preset-sample-btn treat-quick-btn" data-val="Coffee & Pastry Treat">Coffee Treat</button>
-                <button type="button" class="preset-sample-btn treat-quick-btn" data-val="Amul Ice Cream Treat">Ice Cream Treat</button>
-              </div>
-              <div style="font-size:0.75rem; color:var(--text-muted); margin-top:0.5rem; display:flex; align-items:center; gap:0.35rem;">
-                <span>ℹ️</span> <em>Treats are offered exclusively from campus Food spots (Dominos, DC, FC, Darling Cafe, Darling Canteen, Amul, Places near Dominos, SJT Foodys). Hangout-only spots like Foodys are not eligible for treats.</em>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Optional Security Question for Found Items -->
-        <div class="form-group" id="foundVerificationGroup" style="display:none;">
-          <label class="form-label" for="itemExtraField" id="extraFieldLabel">
-            <span>Verification Question (Proof of Ownership)</span>
-          </label>
-          <input 
-            type="text" 
-            id="itemExtraField" 
-            name="extraField" 
-            class="form-input" 
-            placeholder="e.g. What is the keychain color or sticker on the back?"
-          >
-        </div>
-
-        <!-- Form Footer Buttons -->
-        <div class="form-actions">
-          <button type="button" class="btn-secondary" id="cancelPostBtn">Cancel</button>
-          <button type="submit" class="btn-primary" id="submitPostBtn">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg>
-            <span>Publish Item</span>
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- =========================================================================
-       MODAL 2: Claim Item & Ownership Verification Dialog
-       ========================================================================= -->
-  <div class="modal-backdrop" id="claimModal" role="dialog" aria-modal="true" aria-labelledby="claimModalTitle">
-    <div class="modal-window">
-      <div class="modal-header">
-        <div class="modal-title-wrap">
-          <div class="modal-title-icon" style="background:var(--status-found-bg); color:var(--status-found-text);" aria-hidden="true">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-            </svg>
-          </div>
-          <div>
-            <h2 class="modal-title" id="claimModalTitle">Claim Item Ownership</h2>
-            <div class="modal-subtitle">Verify details to safely retrieve this item</div>
-          </div>
-        </div>
-        <button class="modal-close-btn" id="closeClaimModalBtn" aria-label="Close dialog">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
-        </button>
-      </div>
-
-      <form id="claimItemForm" class="modal-body" novalidate>
-        <!-- Item Summary Banner -->
-        <div class="claim-summary-card">
-          <img id="claimItemImg" class="claim-summary-img" src="" alt="Claim item thumbnail">
-          <div class="claim-summary-details">
-            <h4 id="claimItemTitle">Item Title</h4>
-            <div class="claim-summary-meta" id="claimItemLocation">Science Library &bull; Found 2 days ago</div>
-          </div>
-        </div>
-
-        <!-- Verification Question Display -->
-        <div class="detail-safety-box" id="claimQuestionBox" style="display:none;">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--primary-600); flex-shrink:0;">
-            <circle cx="12" cy="12" r="10"></circle>
-            <line x1="12" y1="16" x2="12" y2="12"></line>
-            <line x1="12" y1="8" x2="12.01" y2="8"></line>
-          </svg>
-          <div>
-            <strong style="display:block; margin-bottom:0.15rem; color:var(--text-main);">Verification Question from Finder:</strong>
-            <span id="claimVerificationQuestionText">Describe distinguishing marks</span>
-          </div>
-        </div>
-
-        <!-- Claim Answers -->
-        <div class="form-group">
-          <label class="form-label" for="claimProofInput">
-            <span>Your Proof of Ownership / Identifying Features <span style="color:var(--accent-rose);">*</span></span>
-          </label>
-          <textarea 
-            id="claimProofInput" 
-            class="form-textarea" 
-            rows="3" 
-            placeholder="Describe unique details only the rightful owner would know (e.g. lock screen wallpaper, stickers, serial digits, keychain count)..." 
-            required
-          ></textarea>
-          <div class="form-error-msg" id="claimProofError">Please provide identifying proof to verify ownership.</div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label" for="claimantNameInput">
-              <span>Your Full Name <span style="color:var(--accent-rose);">*</span></span>
-            </label>
-            <input type="text" id="claimantNameInput" class="form-input" placeholder="e.g. Alex Morgan" required>
-            <div class="form-error-msg" id="claimantNameError">Please enter your name.</div>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" for="claimantEmailInput">
-              <span>Campus Email <span style="color:var(--accent-rose);">*</span></span>
-            </label>
-            <input type="email" id="claimantEmailInput" class="form-input" placeholder="e.g. amorgan@campus.edu" required>
-            <div class="form-error-msg" id="claimantEmailError">Please enter a valid campus email.</div>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label" for="claimPickupSpotSelect">
-            <span>Preferred Handover / Retrieval Spot</span>
-          </label>
-          <select id="claimPickupSpotSelect" class="form-select">
-            <option value="building-front-desk">Building Front Desk / Circulation Desk</option>
-            <option value="campus-safety">Campus Safety &amp; Security Office</option>
-            <option value="student-union-info">Student Union Information Counter</option>
-            <option value="direct-public-meet">Direct Public Meetup at Daylight Commons Cafe</option>
-          </select>
-        </div>
-
-        <div class="form-actions">
-          <button type="button" class="btn-secondary" id="cancelClaimBtn">Cancel</button>
-          <button type="submit" class="btn-primary" style="background:var(--accent-emerald);">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg>
-            <span>Confirm &amp; Claim Item</span>
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- =========================================================================
-       MODAL 3: Full Item Details Viewer
-       ========================================================================= -->
-  <div class="modal-backdrop" id="detailModal" role="dialog" aria-modal="true" aria-labelledby="detailModalTitle">
-    <div class="modal-window">
-      <div class="modal-header">
-        <div class="modal-title-wrap">
-          <div class="modal-title-icon" id="detailModalIcon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10"></circle>
-              <line x1="12" y1="16" x2="12" y2="12"></line>
-              <line x1="12" y1="8" x2="12.01" y2="8"></line>
-            </svg>
-          </div>
-          <div>
-            <h2 class="modal-title" id="detailModalTitle">Item Details</h2>
-            <div class="modal-subtitle" id="detailModalSubtitle">ID: #UF-0000</div>
-          </div>
-        </div>
-        <button class="modal-close-btn" id="closeDetailModalBtn" aria-label="Close dialog">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
-        </button>
-      </div>
-
-      <div class="modal-body" id="detailModalContent">
-        <!-- Media Viewer -->
-        <div class="detail-media-wrap">
-          <img id="detailImg" class="detail-img" src="" alt="Detailed photo">
-        </div>
-
-        <!-- Title & Status -->
-        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:0.75rem;">
-          <div>
-            <h3 id="detailTitle" style="font-size:1.35rem; margin-bottom:0.25rem;">Title</h3>
-            <span id="detailCategoryBadge" class="brand-badge">Category</span>
-          </div>
-          <span id="detailStatusBadge" class="card-status-badge">Status</span>
-        </div>
-
-        <!-- Description -->
-        <p id="detailDescription" style="color:var(--text-secondary); line-height:1.6; margin-bottom:1rem;">
-          Description
-        </p>
-
-        <!-- Information Grid -->
-        <div class="detail-info-grid">
-          <div class="detail-info-item">
-            <label>Campus Location</label>
-            <p id="detailLocation">Science Library</p>
-          </div>
-          <div class="detail-info-item">
-            <label>Specific Spot</label>
-            <p id="detailSpot">2nd floor desk</p>
-          </div>
-          <div class="detail-info-item">
-            <label>Date &amp; Time Logged</label>
-            <p id="detailDate">Oct 22, 2026</p>
-          </div>
-          <div class="detail-info-item">
-            <label>Current Proximity</label>
-            <p id="detailDistance">0.2 mi &bull; 3 min walk</p>
-          </div>
-          <div class="detail-info-item">
-            <label>Reported By</label>
-            <p id="detailReporter">Marcus Vance</p>
-          </div>
-          <div class="detail-info-item">
-            <label>Contact Method</label>
-            <p id="detailContact">contact@campus.edu</p>
-          </div>
-        </div>
-
-        <!-- Safety Guidelines Box -->
-        <div class="detail-safety-box">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent-cyan); flex-shrink:0;">
-            <circle cx="12" cy="12" r="10"></circle>
-            <line x1="12" y1="8" x2="12" y2="12"></line>
-            <line x1="12" y1="16" x2="12.01" y2="16"></line>
-          </svg>
-          <div>
-            <strong>Campus Safety Tip:</strong> Always arrange handovers in public campus spaces (e.g. library circulation desks, student center lounges, or during daylight hours). Never share private passwords.
-          </div>
-        </div>
-
-        <!-- Actions in details modal -->
-        <div class="form-actions" id="detailModalActions">
-          <button type="button" class="btn-secondary" id="detailShareBtn">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="18" cy="5" r="3"></circle>
-              <circle cx="6" cy="12" r="3"></circle>
-              <circle cx="18" cy="19" r="3"></circle>
-              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
-              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
-            </svg>
-            <span>Share Link</span>
-          </button>
-          <button type="button" class="btn-primary" id="detailClaimActionBtn">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-            </svg>
-            <span>Claim This Item</span>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Toast Container -->
-  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
 
   <!-- Responsive Footer -->
   <footer class="site-footer" role="contentinfo">
     <div class="container footer-inner">
       <div class="footer-copy">
-        &copy; 2026 <strong>VIT Find Hub</strong> &bull; Built for VIT Vellore with modern vanilla HTML5, CSS3 &amp; ES6+ JavaScript.
+        &copy; 2026 <strong>VIT Find Hub</strong> &bull; Campus Lost &amp; Found Portal for VIT Vellore.
       </div>
       <div class="footer-links">
-        <button id="resetMockDataBtn" title="Restore default sample campus items">Reset Mock Data</button>
-        <span style="color:var(--border-strong);">&bull;</span>
-        <button id="scrollToTopBtn">Back to Top &uarr;</button>
+        <span style="color:var(--text-muted); font-size:0.8rem;">Vellore Institute of Technology &bull; Student Identity Protection</span>
       </div>
     </div>
   </footer>
 
-  <!-- Scripts: Data, Components, Form Validation, Master Controller -->
-  <script src="js/mockData.js"></script>
-  <script src="js/components.js"></script>
-  <script src="js/formValidator.js"></script>
-  <script src="js/app.js"></script>
+  <!-- Gateway Logic: Live ID Preview, School Detection, Theme & Redirect -->
+  <script>
+    (function() {
+      // 1. Theme Management (Sync with home.html)
+      const savedTheme = localStorage.getItem("vitfind_theme") || "light";
+      document.documentElement.setAttribute("data-theme", savedTheme);
+      updateThemeIcons(savedTheme);
+
+      const themeToggleBtn = document.getElementById("themeToggleBtn");
+      if (themeToggleBtn) {
+        themeToggleBtn.addEventListener("click", () => {
+          const currentTheme = document.documentElement.getAttribute("data-theme") || "light";
+          const newTheme = currentTheme === "light" ? "dark" : "light";
+          document.documentElement.setAttribute("data-theme", newTheme);
+          localStorage.setItem("vitfind_theme", newTheme);
+          updateThemeIcons(newTheme);
+        });
+      }
+
+      function updateThemeIcons(theme) {
+        const sun = document.getElementById("themeIconSun");
+        const moon = document.getElementById("themeIconMoon");
+        if (sun && moon) {
+          if (theme === "dark") {
+            sun.style.display = "none";
+            moon.style.display = "block";
+          } else {
+            sun.style.display = "block";
+            moon.style.display = "none";
+          }
+        }
+      }
+
+      // 2. School Detection Mapping for VIT Branch Codes
+      const SCHOOL_MAP = {
+        "BCE": "SCOPE • School of Computer Science & Engineering",
+        "BCSE": "SCOPE • School of Computer Science & Engineering",
+        "BCS": "SCOPE • School of Computer Science & Engineering",
+        "MIS": "SITE • School of Information Technology & Engineering",
+        "BIT": "SITE • School of Information Technology & Engineering",
+        "SWE": "SITE • Software Engineering",
+        "BME": "SMEC • School of Mechanical Engineering",
+        "BEE": "SELECT • School of Electrical Engineering",
+        "ECE": "SENSE • School of Electronics Engineering",
+        "ECM": "SENSE • Electronics & Communication",
+        "BCL": "SCE • School of Civil Engineering",
+        "BCH": "SCHEME • School of Chemical Engineering",
+        "BBA": "VSB • VIT School of Business",
+        "MBA": "VSB • VIT School of Business",
+        "BAR": "V-SPARC • School of Architecture",
+        "LAW": "VITSOL • VIT School of Law"
+      };
+
+      function detectSchool(regNo) {
+        if (!regNo) return "VIT Vellore Campus";
+        const clean = regNo.toUpperCase().trim();
+        // Regex to extract 2 to 4 letter branch code after the 2-digit admission year
+        // e.g. 21BCE1042 -> BCE, 23MIS0182 -> MIS, 24BCSE105 -> BCSE
+        const match = clean.match(/^\d{2}([A-Z]{2,4})/);
+        if (match && match[1] && SCHOOL_MAP[match[1]]) {
+          return SCHOOL_MAP[match[1]];
+        }
+        return "VIT Vellore • Undergraduate / Post-Graduate Scholar";
+      }
+
+      // 3. Elements
+      const form = document.getElementById("gatewayForm");
+      const nameInput = document.getElementById("userNameInput");
+      const regInput = document.getElementById("userRegInput");
+      const spotSelect = document.getElementById("userSpotSelect");
+      const nameError = document.getElementById("nameErrorMsg");
+      const regError = document.getElementById("regErrorMsg");
+      const schoolBadge = document.getElementById("detectedSchoolBadge");
+      const schoolText = document.getElementById("detectedSchoolText");
+      const submitBtn = document.getElementById("submitGatewayBtn");
+      const submitBtnText = document.getElementById("submitBtnText");
+
+      // Card Preview Elements
+      const cardName = document.getElementById("cardPreviewName");
+      const cardReg = document.getElementById("cardPreviewReg");
+      const cardSchool = document.getElementById("cardPreviewSchool");
+      const cardInitials = document.getElementById("cardPreviewInitials");
+      const cardBarcode = document.getElementById("cardBarcodeReg");
+
+      // 4. Live Updates as User Types
+      function updateCardPreview() {
+        const nameVal = nameInput.value.trim() || "Aarav Sharma";
+        const regVal = (regInput.value.trim() || "21BCE1042").toUpperCase();
+        const detected = detectSchool(regVal);
+
+        cardName.textContent = nameVal;
+        cardReg.textContent = regVal;
+        cardSchool.textContent = detected;
+        cardBarcode.textContent = regVal;
+
+        // Compute initials
+        const parts = nameVal.split(" ").filter(Boolean);
+        const initials = parts.map(p => p[0]).slice(0, 2).join("").toUpperCase() || "ST";
+        cardInitials.textContent = initials;
+
+        // Update badge
+        if (regInput.value.trim().length >= 4) {
+          schoolText.textContent = detected;
+          schoolBadge.classList.remove("hidden");
+        } else {
+          schoolBadge.classList.add("hidden");
+        }
+      }
+
+      nameInput.addEventListener("input", () => {
+        nameError.style.display = "none";
+        nameInput.classList.remove("invalid");
+        updateCardPreview();
+      });
+
+      regInput.addEventListener("input", () => {
+        regInput.value = regInput.value.toUpperCase();
+        regError.style.display = "none";
+        regInput.classList.remove("invalid");
+        updateCardPreview();
+      });
+
+      // 5. One-Click Demo Profile Chips
+      document.querySelectorAll(".demo-chip-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          nameInput.value = btn.dataset.name;
+          regInput.value = btn.dataset.reg;
+          if (btn.dataset.spot && spotSelect) {
+            spotSelect.value = btn.dataset.spot;
+          }
+          nameError.style.display = "none";
+          regError.style.display = "none";
+          nameInput.classList.remove("invalid");
+          regInput.classList.remove("invalid");
+          updateCardPreview();
+
+          // Highlight effect
+          btn.style.transform = "scale(0.96)";
+          setTimeout(() => btn.style.transform = "", 150);
+        });
+      });
+
+      // 6. Check if user is already signed in
+      const urlParams = new URLSearchParams(window.location.search);
+      const isSwitch = urlParams.get("switch") === "true" || urlParams.get("logout") === "true";
+      let existingUserRaw = null;
+      try {
+        existingUserRaw = localStorage.getItem("vitfind_user");
+      } catch (e) {}
+
+      if (existingUserRaw && !isSwitch) {
+        try {
+          const user = JSON.parse(existingUserRaw);
+          if (user && user.name && user.regNo) {
+            // Show the welcome back section
+            const wbSection = document.getElementById("welcomeBackSection");
+            const wbGreeting = document.getElementById("wbGreeting");
+            const wbNameDisplay = document.getElementById("wbNameDisplay");
+            const wbRegDisplay = document.getElementById("wbRegDisplay");
+            const wbAvatar = document.getElementById("wbAvatarText");
+
+            wbSection.style.display = "block";
+            wbGreeting.textContent = `Welcome back, ${user.name.split(' ')[0]}!`;
+            wbNameDisplay.textContent = user.name;
+            wbRegDisplay.textContent = user.regNo;
+
+            const inits = user.name.split(' ').map(n => n[0]).filter(Boolean).slice(0, 2).join('').toUpperCase() || 'ST';
+            wbAvatar.textContent = inits;
+
+            // Prepopulate form fields as well
+            nameInput.value = user.name;
+            regInput.value = user.regNo;
+            if (user.campusSpot && spotSelect) spotSelect.value = user.campusSpot;
+            updateCardPreview();
+
+            // Setup buttons
+            document.getElementById("wbProceedBtn").addEventListener("click", () => {
+              window.location.href = "home.html";
+            });
+
+            document.getElementById("wbSwitchBtn").addEventListener("click", () => {
+              localStorage.removeItem("vitfind_user");
+              wbSection.style.display = "none";
+              nameInput.value = "";
+              regInput.value = "";
+              updateCardPreview();
+              nameInput.focus();
+            });
+          }
+        } catch (e) {
+          localStorage.removeItem("vitfind_user");
+        }
+      }
+
+      // 7. Form Submission & Validation -> Redirect to Home Page
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const name = nameInput.value.trim();
+        const regNo = regInput.value.trim().toUpperCase();
+        const campusSpot = spotSelect.value;
+        let isValid = true;
+
+        // Name Validation
+        if (!name || name.length < 2) {
+          nameError.style.display = "block";
+          nameInput.classList.add("invalid");
+          isValid = false;
+        } else {
+          nameError.style.display = "none";
+          nameInput.classList.remove("invalid");
+        }
+
+        // Registration Number Validation (alphanumeric, at least 4 characters)
+        const regPattern = /^[0-9]{2}[A-Z]{2,4}[0-9]{3,5}$/i;
+        const isFlexibleReg = regNo.length >= 4 && /^[0-9A-Z]+$/i.test(regNo);
+
+        if (!regNo || (!regPattern.test(regNo) && !isFlexibleReg)) {
+          regError.style.display = "block";
+          regInput.classList.add("invalid");
+          isValid = false;
+        } else {
+          regError.style.display = "none";
+          regInput.classList.remove("invalid");
+        }
+
+        if (!isValid) return;
+
+        // Success state: show feedback
+        const school = detectSchool(regNo);
+        const userData = {
+          name: name,
+          regNo: regNo,
+          school: school,
+          campusSpot: campusSpot,
+          loginTime: new Date().toISOString()
+        };
+
+        // Save session & preferred location to localStorage
+        try {
+          localStorage.setItem("vitfind_user", JSON.stringify(userData));
+          localStorage.setItem("vitfind_user_location", campusSpot);
+        } catch (e) {
+          console.warn("Storage error", e);
+        }
+
+        // Visual confirmation on button
+        submitBtn.disabled = true;
+        submitBtn.style.background = "linear-gradient(135deg, #10b981 0%, #059669 100%)";
+        submitBtnText.textContent = "Verified! Redirecting to Home Page...";
+
+        // Trigger redirect to home page
+        setTimeout(() => {
+          window.location.href = "home.html";
+        }, 500);
+      });
+
+      // Brand click handler
+      const brandLogoBtn = document.getElementById("brandLogoBtn");
+      if (brandLogoBtn) {
+        brandLogoBtn.addEventListener("click", () => {
+          window.location.reload();
+        });
+      }
+
+      // Initialize default card preview
+      updateCardPreview();
+    })();
+  </script>
 </body>
 </html>
