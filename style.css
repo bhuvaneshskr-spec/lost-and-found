@@ -1753,3 +1753,691 @@ button, input, select, textarea {
     grid-template-columns: 1fr;
   }
 }
+
+/* ==========================================================================
+   Student Verification Gateway & Digital ID Card Preview Styles
+   ========================================================================== */
+
+/* Header Profile Badge (in Home Page) */
+.user-profile-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  padding: 0.25rem 0.45rem 0.25rem 0.65rem;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-fast);
+}
+
+.user-profile-badge:hover {
+  border-color: var(--primary-500);
+  box-shadow: 0 0 12px var(--primary-glow);
+}
+
+.user-avatar-circle {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary-600), var(--accent-cyan));
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 0.72rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(79, 70, 229, 0.35);
+}
+
+.user-info-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.user-info-text .user-name {
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: var(--text-main);
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.user-info-text .user-regno {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.user-logout-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--text-muted);
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all var(--transition-fast);
+}
+
+.user-logout-btn:hover {
+  background: rgba(244, 63, 94, 0.12);
+  color: var(--accent-rose);
+  transform: scale(1.08);
+}
+
+/* User Welcome Banner in Hero */
+.user-welcome-banner {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.85rem;
+  background: var(--primary-50);
+  border: 1px solid var(--primary-200);
+  border-radius: var(--radius-full);
+  font-size: 0.84rem;
+  color: var(--primary-700);
+  margin-bottom: 0.75rem;
+  box-shadow: var(--shadow-sm);
+  animation: fadeIn 0.4s ease-out;
+}
+
+[data-theme="dark"] .user-welcome-banner {
+  background: rgba(99, 102, 241, 0.15);
+  border-color: rgba(99, 102, 241, 0.35);
+  color: #c7d2fe;
+}
+
+.user-welcome-banner code {
+  background: rgba(79, 70, 229, 0.12);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: ui-monospace, monospace;
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   Gateway Entry Page Specific Styles
+   ========================================================================== */
+
+.gateway-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.gateway-container {
+  max-width: 1160px;
+  margin: 1.5rem auto 3rem;
+  padding: 0 1.5rem;
+  width: 100%;
+}
+
+.gateway-hero {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 2.5rem;
+}
+
+.gateway-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 1rem;
+  border-radius: var(--radius-full);
+  background: var(--primary-50);
+  border: 1px solid var(--primary-200);
+  color: var(--primary-700);
+  font-size: 0.82rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+[data-theme="dark"] .gateway-pill {
+  background: rgba(99, 102, 241, 0.15);
+  border-color: rgba(99, 102, 241, 0.3);
+  color: #c7d2fe;
+}
+
+.gateway-hero-title {
+  font-size: 2.6rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.18;
+  margin-bottom: 0.85rem;
+  color: var(--text-main);
+}
+
+.gateway-hero-desc {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Gateway Two-Column Layout */
+.gateway-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.95fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+/* Form Card */
+.gateway-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  box-shadow: var(--shadow-xl);
+  position: relative;
+  overflow: hidden;
+}
+
+.gateway-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-600), var(--accent-cyan), var(--primary-500));
+}
+
+.gateway-card-header {
+  margin-bottom: 1.6rem;
+}
+
+.gateway-card-title {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.3rem;
+}
+
+.gateway-card-desc {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+/* School detection dynamic feedback badge */
+.detected-school-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.45rem;
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--radius-sm);
+  background: rgba(16, 185, 129, 0.12);
+  color: var(--accent-emerald);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  transition: all var(--transition-fast);
+}
+
+.detected-school-badge.hidden {
+  display: none;
+}
+
+/* Quick Demo Students Selector */
+.demo-students-box {
+  margin: 1.3rem 0;
+  padding: 0.9rem 1rem;
+  background: var(--bg-subtle);
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-md);
+}
+
+.demo-students-title {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.6rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.demo-chips-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.demo-chip-btn {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  padding: 0.3rem 0.7rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-main);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-sm);
+}
+
+.demo-chip-btn:hover {
+  border-color: var(--primary-600);
+  background: var(--primary-50);
+  color: var(--primary-700);
+  transform: translateY(-1px);
+}
+
+[data-theme="dark"] .demo-chip-btn:hover {
+  background: rgba(99, 102, 241, 0.2);
+  color: #ffffff;
+}
+
+.demo-chip-btn .chip-spot {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  background: var(--bg-subtle);
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+/* Big Enter Hub Button */
+.btn-gateway-submit {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.95rem 1.5rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--primary-600) 0%, var(--primary-700) 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.4);
+  transition: all var(--transition-normal);
+  margin-top: 1.25rem;
+}
+
+.btn-gateway-submit:hover {
+  background: linear-gradient(135deg, var(--primary-500) 0%, var(--primary-600) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(79, 70, 229, 0.5);
+}
+
+.btn-gateway-submit:active {
+  transform: translateY(0);
+}
+
+/* Welcome Back Card for active sessions */
+.welcome-back-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--primary-200);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  box-shadow: var(--shadow-xl);
+  text-align: center;
+}
+
+[data-theme="dark"] .welcome-back-card {
+  border-color: rgba(99, 102, 241, 0.35);
+}
+
+.wb-avatar-wrap {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary-600), var(--accent-cyan));
+  color: #ffffff;
+  font-size: 1.6rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.2rem;
+  box-shadow: 0 4px 16px rgba(79, 70, 229, 0.4);
+}
+
+/* ==========================================================================
+   Virtual VIT Student ID Card (Interactive Live Preview)
+   ========================================================================== */
+
+.id-card-preview-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.id-card-badge-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+}
+
+.live-pulse-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-emerald);
+  box-shadow: 0 0 8px var(--accent-emerald);
+  animation: pulse 1.8s infinite;
+}
+
+/* The Physical-feeling ID Card */
+.vit-id-card {
+  background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.45), 0 0 20px rgba(79, 70, 229, 0.2);
+  color: #ffffff;
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.vit-id-card:hover {
+  transform: translateY(-4px) rotate(0.5deg);
+  box-shadow: 0 25px 40px -10px rgba(0, 0, 0, 0.55), 0 0 30px rgba(79, 70, 229, 0.35);
+}
+
+/* Hologram foil reflection */
+.vit-id-card::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 42%,
+    rgba(255, 255, 255, 0.08) 46%,
+    rgba(6, 182, 212, 0.15) 50%,
+    rgba(244, 63, 94, 0.1) 54%,
+    transparent 58%
+  );
+  pointer-events: none;
+  transform: rotate(25deg);
+  animation: holoSheen 6s infinite ease-in-out;
+}
+
+@keyframes holoSheen {
+  0%, 100% { transform: translateY(-30%) rotate(25deg); opacity: 0.4; }
+  50% { transform: translateY(30%) rotate(25deg); opacity: 0.8; }
+}
+
+.id-card-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  padding-bottom: 0.85rem;
+  margin-bottom: 1.1rem;
+}
+
+.id-inst-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.id-inst-crest {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 0.95rem;
+  color: #1e293b;
+  box-shadow: 0 2px 6px rgba(245, 158, 11, 0.4);
+}
+
+.id-inst-text {
+  line-height: 1.15;
+}
+
+.id-inst-name {
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.6px;
+  color: #f8fafc;
+  text-transform: uppercase;
+}
+
+.id-inst-sub {
+  font-size: 0.65rem;
+  color: #94a3b8;
+  letter-spacing: 0.4px;
+}
+
+.id-card-chip-sim {
+  width: 34px;
+  height: 25px;
+  background: linear-gradient(135deg, #d4af37 0%, #aa8012 100%);
+  border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  position: relative;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.id-card-chip-sim::before {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(0,0,0,0.3);
+}
+
+.id-card-chip-sim::after {
+  content: "";
+  position: absolute;
+  bottom: 6px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(0,0,0,0.3);
+}
+
+/* Card Body with Photo + Data */
+.id-card-middle {
+  display: flex;
+  gap: 1.1rem;
+  align-items: flex-start;
+  margin-bottom: 1.1rem;
+}
+
+.id-photo-box {
+  width: 90px;
+  height: 105px;
+  border-radius: 10px;
+  background: #334155;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.id-photo-initials {
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: #f8fafc;
+  background: linear-gradient(135deg, var(--primary-500), var(--accent-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.id-photo-label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(15, 23, 42, 0.85);
+  font-size: 0.58rem;
+  text-align: center;
+  padding: 2px 0;
+  color: #94a3b8;
+  text-transform: uppercase;
+}
+
+.id-fields-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.id-field-item label {
+  display: block;
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: #94a3b8;
+  margin-bottom: 1px;
+}
+
+.id-field-item .id-val-name {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #f8fafc;
+  line-height: 1.2;
+}
+
+.id-field-item .id-val-reg {
+  font-size: 0.95rem;
+  font-weight: 700;
+  font-family: ui-monospace, monospace;
+  color: #38bdf8;
+  letter-spacing: 0.8px;
+}
+
+.id-field-item .id-val-school {
+  font-size: 0.72rem;
+  color: #cbd5e1;
+  font-weight: 600;
+}
+
+/* Card Bottom & Barcode */
+.id-card-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.id-barcode-lines {
+  height: 26px;
+  width: 140px;
+  background: repeating-linear-gradient(
+    90deg,
+    #ffffff 0,
+    #ffffff 2px,
+    transparent 2px,
+    transparent 4px,
+    #ffffff 4px,
+    #ffffff 7px,
+    transparent 7px,
+    transparent 9px,
+    #ffffff 9px,
+    #ffffff 10px,
+    transparent 10px,
+    transparent 13px
+  );
+  opacity: 0.85;
+}
+
+.id-validity-tag {
+  text-align: right;
+  font-size: 0.64rem;
+  color: #94a3b8;
+  line-height: 1.2;
+}
+
+.id-validity-tag strong {
+  display: block;
+  color: #10b981;
+  font-weight: 700;
+}
+
+/* Highlights Box below ID card */
+.gateway-features-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.4rem;
+  box-shadow: var(--shadow-md);
+}
+
+.gateway-features-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.gateway-features-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.gateway-feature-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  font-size: 0.84rem;
+  color: var(--text-secondary);
+}
+
+.gateway-feature-row svg {
+  color: var(--primary-600);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+@media (max-width: 900px) {
+  .gateway-grid {
+    grid-template-columns: 1fr;
+  }
+  .id-card-preview-container {
+    order: -1; /* Display live ID card above form on small screens */
+  }
+  .gateway-hero-title {
+    font-size: 2rem;
+  }
+}
+
