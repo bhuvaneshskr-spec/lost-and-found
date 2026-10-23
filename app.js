@@ -15,6 +15,7 @@ const App = {
     sortBy: "newest" // "newest" | "oldest" | "nearest" | "title"
   },
   currentUserLocation: "sjt", // Silver Jubilee Tower (SJT) by default
+  currentUser: null,
   currentlyViewingItemId: null,
   currentlyClaimingItemId: null,
   debounceTimer: null,
@@ -22,6 +23,7 @@ const App = {
 
   // App Initialization
   init() {
+    this.initUserSession();
     this.initTheme();
     this.loadData();
     this.populateLocationSelectors();
@@ -32,6 +34,64 @@ const App = {
     // Initial render with brief realistic skeleton loading state
     this.applyFilters(true);
     this.updateStats();
+  },
+
+  // Student Session Management
+  initUserSession() {
+    let rawUser = null;
+    try {
+      rawUser = localStorage.getItem("vitfind_user");
+    } catch (e) {
+      console.warn("Storage access issue:", e);
+    }
+
+    if (!rawUser) {
+      window.location.replace("index.html");
+      return;
+    }
+
+    try {
+      const user = JSON.parse(rawUser);
+      this.currentUser = user;
+
+      // Update Header Profile Badge
+      const headerName = document.getElementById("headerUserName");
+      const headerReg = document.getElementById("headerUserReg");
+      const avatarText = document.getElementById("userAvatarText");
+      const heroName = document.getElementById("heroUserName");
+      const heroReg = document.getElementById("heroUserReg");
+      const heroSchool = document.getElementById("heroUserSchool");
+
+      if (headerName) headerName.textContent = user.name;
+      if (headerReg) headerReg.textContent = user.regNo;
+      if (avatarText) {
+        const initials = user.name.split(' ').map(n => n[0]).filter(Boolean).slice(0, 2).join('').toUpperCase() || 'ST';
+        avatarText.textContent = initials;
+      }
+      if (heroName) heroName.textContent = user.name;
+      if (heroReg) heroReg.textContent = user.regNo;
+      if (heroSchool) heroSchool.textContent = user.school || "VIT Vellore";
+
+      // If student selected a preferred spot, apply it
+      if (user.campusSpot) {
+        this.currentUserLocation = user.campusSpot;
+      }
+
+      // Setup Switch / Logout button
+      const logoutBtn = document.getElementById("logoutBtn");
+      if (logoutBtn) {
+        logoutBtn.addEventListener("click", () => {
+          if (confirm(`Switch student profile or sign out from ${user.name} (${user.regNo})?`)) {
+            localStorage.removeItem("vitfind_user");
+            window.location.href = "index.html?switch=true";
+          }
+        });
+      }
+    } catch (e) {
+      console.error("Invalid session data:", e);
+      localStorage.removeItem("vitfind_user");
+      window.location.replace("index.html");
+    }
   },
 
   // Theme Management (Dark / Light)
@@ -538,6 +598,18 @@ const App = {
   // Open Post Item Modal
   openPostModal() {
     const modal = document.getElementById("postModal");
+    // Pre-fill student contact credentials if available
+    if (this.currentUser) {
+      const posterNameInput = document.getElementById("itemPosterName");
+      const posterContactInput = document.getElementById("itemContact");
+      if (posterNameInput && !posterNameInput.value) {
+        posterNameInput.value = this.currentUser.name;
+      }
+      if (posterContactInput && !posterContactInput.value) {
+        const cleanName = this.currentUser.name.toLowerCase().replace(/[^a-z0-9]/g, '.');
+        posterContactInput.value = `${cleanName}.${this.currentUser.regNo.toLowerCase()}@vitstudent.ac.in`;
+      }
+    }
     modal.classList.add("open");
     document.body.style.overflow = "hidden";
     setTimeout(() => {
@@ -563,6 +635,19 @@ const App = {
     document.getElementById("claimItemImg").src = item.image;
     document.getElementById("claimItemTitle").textContent = item.title;
     document.getElementById("claimItemLocation").textContent = `${item.location} • Logged ${Components.formatRelativeTime(item.date)}`;
+
+    // Auto-fill claimant credentials
+    if (this.currentUser) {
+      const claimantNameInput = document.getElementById("claimantNameInput");
+      const claimantEmailInput = document.getElementById("claimantEmailInput");
+      if (claimantNameInput && !claimantNameInput.value) {
+        claimantNameInput.value = this.currentUser.name;
+      }
+      if (claimantEmailInput && !claimantEmailInput.value) {
+        const cleanName = this.currentUser.name.toLowerCase().replace(/[^a-z0-9]/g, '.');
+        claimantEmailInput.value = `${cleanName}.${this.currentUser.regNo.toLowerCase()}@vitstudent.ac.in`;
+      }
+    }
 
     const questionBox = document.getElementById("claimQuestionBox");
     const questionText = document.getElementById("claimVerificationQuestionText");
